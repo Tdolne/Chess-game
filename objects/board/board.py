@@ -19,4 +19,9 @@ class Board:
                 tiles.append(Tile(self.tile_size, (horizontal_index, vertical_index)))
         return tiles
 
+    def update_board_size(self, new_size: int) -> None:
+        self.size = new_size
+        self.tile_size = self.size // 8
+        self.tiles = self.create_tiles()
+
 
