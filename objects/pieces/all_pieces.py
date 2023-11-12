@@ -1,22 +1,28 @@
 import pygame
 
 from objects.pieces.pawn import Pawn
-from objects.pieces.horse import Horse
+from objects.pieces.knight import Knight
 from objects.pieces.kings import King
+from objects.pieces.tower import Tower
 from objects.board.tile import Tile
 
 class AllPieces:
     pawns: list[Pawn]
-    horses: list[Horse]
+    knights: list[Knight]
     kings: list[King]
+    towers: list[Tower]
     all_pieces: list
 
     def __init__(self, tiles: list) -> None:
         self.pawns = self.create_all_pawns(tiles)
-        self.horses = self.create_horses(tiles)
+        self.knights = self.create_knights(tiles)
         self.kings = self.create_kings(tiles)
+        self.towers = self.create_towers(tiles)
 
-        self.all_pieces = self.pawns + self.horses + self.kings
+        self.all_pieces = (self.pawns
+                           + self.knights
+                           + self.kings
+                           + self.towers)
 
     def update_board_size(self, new_tiles: list[Tile]) -> None:
         for piece in self.all_pieces:
@@ -47,10 +53,19 @@ class AllPieces:
         return [white_king, black_king]
 
     @staticmethod
-    def create_horses(tiles: list[Tile]) -> list[Horse]:
-        white_horses = [Horse('white', tiles, 'left'),
-                        Horse('white', tiles, 'right')]
-        black_horses = [Horse('black', tiles, 'left'),
-                        Horse('black', tiles, 'right')]
+    def create_knights(tiles: list[Tile]) -> list[Knight]:
+        white_knights = [Knight('white', tiles, 'left'),
+                        Knight('white', tiles, 'right')]
+        black_knights = [Knight('black', tiles, 'left'),
+                        Knight('black', tiles, 'right')]
 
-        return white_horses + black_horses
+        return white_knights + black_knights
+
+    @staticmethod
+    def create_towers(tiles: list[Tile]) -> list[Tower]:
+        white_towers = [Tower('white', tiles, 'left'),
+                        Tower('white', tiles, 'right')]
+        black_towers = [Tower('black', tiles, 'left'),
+                        Tower('black', tiles, 'right')]
+
+        return white_towers + black_towers

@@ -1,19 +1,20 @@
 import pygame
+
 from objects.board.tile import Tile
 
-class Horse:
+class Tower:
     '''
-    Class representing a single pawn piece.
+    Class representing a single tower piece
 
     Attributes:
         start_position: String indicating the starting position of the
-                        horse, either 'left' or 'right'
-        surface: The pygame.surface object representing the pawn's
+                        tower, either 'left' or 'right'
+        surface: The pygame.surface object representing the tower's
                  position
         rect: The pygame.rect object that gets drawn to the screen
-        color: The color of the pawn, either 'white' or 'black'
-        tile: The tile object that the pawn is currently on
-        image: The pygame.surface object containing the pawn's image
+        color: The color of the tower, either 'white' or 'black'
+        tile: The tile object that the tower is currently on
+        image: The pygame.surface object containing the tower's image
     '''
     start_position: str
     surface: pygame.Surface
@@ -33,7 +34,7 @@ class Horse:
         self.rect = self.surface.get_rect(center=self.position)
 
     def get_initial_tile(self, tiles: list) -> Tile:
-        horizontal_position = 1 if self.start_position == 'left' else 6
+        horizontal_position = 0 if self.start_position == 'left' else 7
         for tile in tiles:
             if (tile.position_indices == (horizontal_position, 7)
                 and self.color == 'white'):
@@ -47,9 +48,9 @@ class Horse:
 
     def load_image(self, color: str) -> pygame.Surface:
         if color == 'white':
-            return pygame.image.load('sprites/white_horse.png')
+            return pygame.image.load('sprites/white_tower.png')
         elif color == 'black':
-            return pygame.image.load('sprites/black_horse.png')
+            return pygame.image.load('sprites/black_tower.png')
         else:
             raise ValueError(
                 f'Color {color} is not valid and should be either white or black'
