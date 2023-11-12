@@ -2,26 +2,34 @@ import pygame
 
 from objects.pieces.pawn import Pawn
 from objects.pieces.knight import Knight
-from objects.pieces.kings import King
+from objects.pieces.bishop import Bishop
+from objects.pieces.king import King
 from objects.pieces.tower import Tower
+from objects.pieces.queen import Queen
 from objects.board.tile import Tile
 
 class AllPieces:
     pawns: list[Pawn]
     knights: list[Knight]
+    bishops: list[Bishop]
     kings: list[King]
+    queens: list[Queen]
     towers: list[Tower]
     all_pieces: list
 
     def __init__(self, tiles: list) -> None:
         self.pawns = self.create_all_pawns(tiles)
         self.knights = self.create_knights(tiles)
+        self.bishops = self.create_bishops(tiles)
         self.kings = self.create_kings(tiles)
+        self.queens = self.create_queens(tiles)
         self.towers = self.create_towers(tiles)
 
         self.all_pieces = (self.pawns
                            + self.knights
+                           + self.bishops
                            + self.kings
+                           + self.queens
                            + self.towers)
 
     def update_board_size(self, new_tiles: list[Tile]) -> None:
@@ -53,6 +61,13 @@ class AllPieces:
         return [white_king, black_king]
 
     @staticmethod
+    def create_queens(tiles: list[Tile]) -> list[Queen]:
+        white_queen = Queen('white', tiles)
+        black_queen = Queen('black', tiles)
+
+        return [white_queen, black_queen]
+
+    @staticmethod
     def create_knights(tiles: list[Tile]) -> list[Knight]:
         white_knights = [Knight('white', tiles, 'left'),
                         Knight('white', tiles, 'right')]
@@ -60,6 +75,15 @@ class AllPieces:
                         Knight('black', tiles, 'right')]
 
         return white_knights + black_knights
+
+    @staticmethod
+    def create_bishops(tiles: list[Tile]) -> list[Bishop]:
+        white_bishops = [Bishop('white', tiles, 'left'),
+                         Bishop('white', tiles, 'right')]
+        black_bishops = [Bishop('black', tiles, 'left'),
+                         Bishop('black', tiles, 'right')]
+
+        return white_bishops + black_bishops
 
     @staticmethod
     def create_towers(tiles: list[Tile]) -> list[Tower]:

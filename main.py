@@ -3,7 +3,7 @@ from pygame.locals import QUIT, VIDEORESIZE
 from objects.board.board import Board
 from objects.board.tile import Tile
 from objects.pieces.pawn import Pawn
-from objects.pieces.kings import King
+from objects.pieces.king import King
 from objects.pieces.knight import Knight
 from objects.pieces.all_pieces import AllPieces
 from config import Config

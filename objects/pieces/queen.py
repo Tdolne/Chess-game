@@ -1,17 +1,18 @@
 import pygame
+
 from objects.board.tile import Tile
 
-class King:
+class Queen:
     '''
-    Class representing a single pawn piece.
+    Class representing a single queen piece.
 
     Attributes:
-        surface: The pygame.surface object representing the pawn's
+        surface: The pygame.surface object representing the queen's
                  position
         rect: The pygame.rect object that gets drawn to the screen
-        color: The color of the pawn, either 'white' or 'black'
-        tile: The tile object that the pawn is currently on
-        image: The pygame.surface object containing the pawn's image
+        color: The color of the queen, either 'white' or 'black'
+        tile: The tile object that the queen is currently on
+        image: The pygame.surface object containing the queen's image
     '''
     surface: pygame.Surface
     rect: pygame.Rect
@@ -30,7 +31,7 @@ class King:
 
     def get_initial_tile(self, tiles: list) -> Tile:
         for tile in tiles:
-            if (tile.position_indices == (4, 7)
+            if (tile.position_indices == (3, 7)
                 and self.color == 'white'):
                 return tile
             elif (tile.position_indices == (3, 0)
@@ -42,9 +43,9 @@ class King:
 
     def load_image(self, color: str) -> pygame.Surface:
         if color == 'white':
-            return pygame.image.load('sprites/white_king.png')
+            return pygame.image.load('sprites/white_queen.png')
         elif color == 'black':
-            return pygame.image.load('sprites/black_king.png')
+            return pygame.image.load('sprites/black_queen.png')
         else:
             raise ValueError(
                 f'Color {color} is not valid and should be either white or black'
