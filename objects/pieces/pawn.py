@@ -55,22 +55,3 @@ class Pawn:
             raise ValueError(
                 f'Color {color} is not valid and should be either white or black'
                 )
-
-    def update_position_from_resize(self, new_tiles: list[Tile]) -> None:
-        old_size = self.tile.size
-        self.tile = self.get_initial_tile(new_tiles)
-
-        self.position = self.tile.center_position
-        self.surface = pygame.Surface((self.tile.size, self.tile.size))
-        self.image = pygame.transform.scale_by(self.image, self.tile.size/old_size)
-        self.rect = self.surface.get_rect(center=self.position)
-
-
-def create_all_pawns(tile_list: list) -> tuple[list, list]:
-    white_pawns = []
-    black_pawns = []
-    for pawn_number in range(8):
-        white_pawns.append(Pawn('white', pawn_number, tile_list))
-        black_pawns.append(Pawn('black', pawn_number, tile_list))
-
-    return white_pawns, black_pawns
