@@ -7,10 +7,16 @@ class Pawn:
     Class representing a single pawn piece.
 
     Attributes:
+        pawn_number: The number of the pawn, from 0 to 7, indicating it's
+                     horizontal position on the board
         surface: The pygame.surface object representing the pawn's
                  position
         rect: The pygame.rect object that gets drawn to the screen
+        color: The color of the pawn, either 'white' or 'black'
+        tile: The tile object that the pawn is currently on
+        image: The pygame.surface object containing the pawn's image
     '''
+    pawn_number: int
     surface: pygame.Surface
     rect: pygame.Rect
     color: str
@@ -21,13 +27,13 @@ class Pawn:
         self.pawn_number = pawn_number
         self.color = color
 
-        self.tile = self.get_correct_tile(tiles)
+        self.tile = self.get_initial_tile(tiles)
         self.image = self.load_image(color)
         self.position = self.tile.center_position
         self.surface = pygame.Surface((self.tile.size, self.tile.size))
         self.rect = self.surface.get_rect(center=self.position)
 
-    def get_correct_tile(self, tiles: list) -> Tile:
+    def get_initial_tile(self, tiles: list) -> Tile:
         for tile in tiles:
             if (tile.position_indices == (self.pawn_number, 6)
                 and self.color == 'white'):
@@ -52,7 +58,7 @@ class Pawn:
 
     def update_position_from_resize(self, new_tiles: list[Tile]) -> None:
         old_size = self.tile.size
-        self.tile = self.get_correct_tile(new_tiles)
+        self.tile = self.get_initial_tile(new_tiles)
 
         self.position = self.tile.center_position
         self.surface = pygame.Surface((self.tile.size, self.tile.size))
